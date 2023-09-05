@@ -70,7 +70,7 @@ Examine the variable descriptions by typing `?txhousing` in the **console**. Wha
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 2 Answers"}
--   Delete this and put your text answer here.
+-   The `listings` variable in this data set represents the number of total active listings. 
 :::
 
 # Data Wrangling Review
