@@ -1,7 +1,6 @@
-
 ---
 title: "Problem Set 03: Data Wrangling"
-author: "Your Name"
+author: "Alyssa Yount"
 date: last-modified
 date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
 format: 
@@ -10,7 +9,6 @@ format:
 editor: visual
 ---
 
-
 ```{r include = FALSE}
 library(knitr)
 library(tidyverse)
@@ -18,17 +16,17 @@ library(scales)
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE,  warning = FALSE)
 ```
 
-In this problem set we will practice some of the key data manipulation tasks for describing, summarizing, and working with data. We will specifically review the following functions from the `dplyr` package: 
+In this problem set we will practice some of the key data manipulation tasks for describing, summarizing, and working with data. We will specifically review the following functions from the `dplyr` package:
 
--  `select`
--  `mutate`
--  `summarize`
--  `arrange`
--  `filter`
--  `group_by`
--  `%>%`
+-   `select`
+-   `mutate`
+-   `summarize`
+-   `arrange`
+-   `filter`
+-   `group_by`
+-   `%>%`
 
-In addition we will review how to save objects using the `<-` assignment operator. 
+In addition we will review how to save objects using the `<-` assignment operator.
 
 The following code loads the necessary packages for this problem set:
 
@@ -52,46 +50,43 @@ glimpse(txhousing)
 ```
 :::
 
-These data are about housing in Texas. Each row is monthly data for a given city in Texas in a given year. There are multiple years of data for each city. 
+These data are about housing in Texas. Each row is monthly data for a given city in Texas in a given year. There are multiple years of data for each city.
 
 ::: {.callout-note icon="false" title="Problem 1"}
-Examine `txhousing` in the data viewer. You can accomplish this two different ways: A) click on the name of the data in the Environment pane, or b) type `View(txhousing)` in the **console**. What is the last city listed in the data set (in row 8602)?  Use `R` code to programatically find the last city in `txhousing`.
+Examine `txhousing` in the data viewer. You can accomplish this two different ways: A) click on the name of the data in the Environment pane, or b) type `View(txhousing)` in the **console**. What is the last city listed in the data set (in row 8602)? Use `R` code to programatically find the last city in `txhousing`.
 :::
-
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 1 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+tail(txhousing, n = 1)$city
 
 ```
 
-* Delete this and put your text answer here. 
-
-::: 
-
+-   The last city in `txhousing` is **`r tail(txhousing, n = 1)$city`**. 
+:::
 
 ::: {.callout-note icon="false" title="Problem 2"}
 Examine the variable descriptions by typing `?txhousing` in the **console**. What is the `listings` variable in this data set?
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 2 Answers"}
-+ Delete this and put your text answer here. 
+-   Delete this and put your text answer here.
 :::
 
 # Data Wrangling Review
 
 ## `select()`
 
-Sometimes we want to pull out or extract just one or two columns of data. The following code will extract only the columns in the data set for the variables `sales` and `volume`. 
+Sometimes we want to pull out or extract just one or two columns of data. The following code will extract only the columns in the data set for the variables `sales` and `volume`.
 
 ```{r, eval = FALSE}
 txhousing %>% 
   select(sales, volume)
 ```
 
-The `%>%` symbol is called the **piping**  operator. Here, it takes the `txhousing` **data frame** and "pipes" or feeds it into the `select` function. You can think of the `%>%` symbol as the word "then". 
+The `%>%` symbol is called the **piping** operator. Here, it takes the `txhousing` **data frame** and "pipes" or feeds it into the `select` function. You can think of the `%>%` symbol as the word "then".
 
-Note that an assignment operator (`<-`) was not used in the code; consequently the selected values are not saved. In the following code, the results are saved in a data frame **ALSO** called `txhousing`. By putting `-` in front of the `date` variable `R` selects all variables **except** the `date` variable. 
+Note that an assignment operator (`<-`) was not used in the code; consequently the selected values are not saved. In the following code, the results are saved in a data frame **ALSO** called `txhousing`. By putting `-` in front of the `date` variable `R` selects all variables **except** the `date` variable.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -101,13 +96,13 @@ head(txhousing)
 ```
 :::
 
-If you examine `txhousing` in the data viewer, the `date` variable is no longer included. 
+If you examine `txhousing` in the data viewer, the `date` variable is no longer included.
 
 ## `filter()`
 
-The filter function allows you to pull out just the **rows** (cases or observations) you want, based on some criteria in **one of the columns**.   
+The filter function allows you to pull out just the **rows** (cases or observations) you want, based on some criteria in **one of the columns**.
 
-Imagine we wanted to reduce the data set to include data for only 2012 in the city of Austin. The code chunk below filters the `txhousing` to only include rows in which the year is 2012 **and** the city is Austin. The results are saved in a new data frame called `austin_12`. 
+Imagine we wanted to reduce the data set to include data for only 2012 in the city of Austin. The code chunk below filters the `txhousing` to only include rows in which the year is 2012 **and** the city is Austin. The results are saved in a new data frame called `austin_12`.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r }
@@ -118,11 +113,11 @@ head(austin_12)
 ```
 :::
 
-::: {.callout-note} 
-Note that we use `==` to identify the desired criteria. 
+::: callout-note
+Note that we use `==` to identify the desired criteria.
 :::
 
-What if we wanted to restrict our data set to only years before 2004 and the City of Austin? Below we use the `<` symbol to accomplish this. Note we did not **SAVE** these results in a new data frame...so no new data frame showed up in our Environment pane, but the results print out immediately below the code chunk. 
+What if we wanted to restrict our data set to only years before 2004 and the City of Austin? Below we use the `<` symbol to accomplish this. Note we did not **SAVE** these results in a new data frame...so no new data frame showed up in our Environment pane, but the results print out immediately below the code chunk.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -132,7 +127,7 @@ txhousing %>%
 ```
 :::
 
-What if we wanted to use multiple cities?  Below we use the  `|` symbol to indicate that the city could be Austin **OR** Abilene. In this case, we **saved** these results as a new data frame called `aust_ab` that appears in your Environment pane.  
+What if we wanted to use multiple cities? Below we use the `|` symbol to indicate that the city could be Austin **OR** Abilene. In this case, we **saved** these results as a new data frame called `aust_ab` that appears in your Environment pane.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -143,10 +138,9 @@ tail(aust_ab)
 ```
 :::
 
-
 ## `mutate()`
 
-The mutate function can add new columns (variables) to a data frame. For instance, the following will add a new column to the data called `vol_100k` that expresses volume in units of $100,000. 
+The mutate function can add new columns (variables) to a data frame. For instance, the following will add a new column to the data called `vol_100k` that expresses volume in units of \$100,000.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -156,22 +150,22 @@ head(txhousing)
 ```
 :::
 
-Note that we **SAVED** these results in new data frame called `txhousing`. This therefore **overwrote** the old `txhousing` data frame with a new version that contains this column. You can open the `txhousing` data frame in the viewer to confirm that it now contains this new column. 
+Note that we **SAVED** these results in new data frame called `txhousing`. This therefore **overwrote** the old `txhousing` data frame with a new version that contains this column. You can open the `txhousing` data frame in the viewer to confirm that it now contains this new column.
 
 ## `summarize()`
 
-One of the first tasks in data analysis is often to get descriptive statistics that help to understand the central tendency and variability in the data. The `summarize()` command can take a column of data, and reduce it to a summary statistic. 
+One of the first tasks in data analysis is often to get descriptive statistics that help to understand the central tendency and variability in the data. The `summarize()` command can take a column of data, and reduce it to a summary statistic.
 
-For instance, the code below uses the `austin_12` data set made earlier to calculate the mean monthly number of `sales` in Austin in 2012. 
+For instance, the code below uses the `austin_12` data set made earlier to calculate the mean monthly number of `sales` in Austin in 2012.
 
 ```{r eval = FALSE}
 austin_12 %>% 
   summarize(x_bar_sales = mean(sales))
 ```
 
-This code tells `R` to calculate the `mean` of the variable `sales`, and to save the results in a variable called `x_bar_sales`. 
+This code tells `R` to calculate the `mean` of the variable `sales`, and to save the results in a variable called `x_bar_sales`.
 
-You can also calculate multiple summary statistics at once, and even for multiple variables. Below we also calculate a standard deviation `sd()` of `sales`, a minimum `min()` of the `volume` variable, a maximum `max()` of the `volume` variable, etc. The `n()` calculates sample size...or the number of rows/ cases in the data frame. 
+You can also calculate multiple summary statistics at once, and even for multiple variables. Below we also calculate a standard deviation `sd()` of `sales`, a minimum `min()` of the `volume` variable, a maximum `max()` of the `volume` variable, etc. The `n()` calculates sample size...or the number of rows/ cases in the data frame.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -187,11 +181,11 @@ kable(ans1)
 ```
 :::
 
-Note that the names of the elements you calculate are  user defined, like `xbar_sales`, `min_vol`, and `mdn_list`. You could customize these names as you like (but don't use spaces in your names). 
+Note that the names of the elements you calculate are user defined, like `xbar_sales`, `min_vol`, and `mdn_list`. You could customize these names as you like (but don't use spaces in your names).
 
 ## `arrange()`
 
-You just determined that the maximum volume of monthly sales in Austin in 2012 was a total of `r dollar(ans1$max_vol)` ... but what if you wanted to know **WHAT MONTH** that occurred in? 
+You just determined that the maximum volume of monthly sales in Austin in 2012 was a total of `r dollar(ans1$max_vol)` ... but what if you wanted to know **WHAT MONTH** that occurred in?
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -202,11 +196,11 @@ head(ans2, n = 3) %>%
 ```
 :::
 
-The above code tells `R` to `arrange` the rows in the data set based on the `volume` column and to do so in `desc`ending order. Consequently, the row with the `r dollar(ans2$volume[1])` in sales is shown at the top. We can see that this `volume` occurred in the $`r ans2$month[1]`^{\text{th}}$ month (`r month.name[ans2$month[1]]`). 
+The above code tells `R` to `arrange` the rows in the data set based on the `volume` column and to do so in `desc`ending order. Consequently, the row with the `r dollar(ans2$volume[1])` in sales is shown at the top. We can see that this `volume` occurred in the $`r ans2$month[1]`^{\text{th}}$ month (`r month.name[ans2$month[1]]`).
 
 ## `group_by()`
 
-Sometimes we also want to calculate summary statistics across different levels of another variable. For instance, here we find the average number of monthly sales that occurred in Abilene and Austin across all years in the data set. Note that we **use the `aust_ab` data frame** we created earlier, to restrict our analysis to those two cities. 
+Sometimes we also want to calculate summary statistics across different levels of another variable. For instance, here we find the average number of monthly sales that occurred in Abilene and Austin across all years in the data set. Note that we **use the `aust_ab` data frame** we created earlier, to restrict our analysis to those two cities.
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
@@ -218,7 +212,7 @@ results %>%
 ```
 :::
 
-From the results we can see that there were an average of `r round(results$x_bar_sales[1],1)` sales per month in Abilene, and `r round(results$x_bar_sales[2],1)` sales per month in Austin. 
+From the results we can see that there were an average of `r round(results$x_bar_sales[1],1)` sales per month in Abilene, and `r round(results$x_bar_sales[2],1)` sales per month in Austin.
 
 We can give `R` multiple variables to group by. For instance, the following code returns the mean sales for each month in each city averaged across all the years.
 
@@ -232,17 +226,16 @@ results_ab %>%
 ```
 :::
 
-The mean number of sales for Abilene in January (across all years) was `r round(results_ab$x_bar_sales[1],1)` homes. 
+The mean number of sales for Abilene in January (across all years) was `r round(results_ab$x_bar_sales[1],1)` homes.
 
-
-# Independent Practice 
+# Independent Practice
 
 ## Basic Syntax
 
-This first set of questions will help you practice basic syntax. 
+This first set of questions will help you practice basic syntax.
 
 ::: {.callout-note icon="false" title="Problem 3"}
-Write a code chunk to remove the inventory variable. Save the results in a data frame called `txhousing`. Confirm the variable `inventory` has been removed. 
+Write a code chunk to remove the inventory variable. Save the results in a data frame called `txhousing`. Confirm the variable `inventory` has been removed.
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 3 Answers"}
@@ -253,7 +246,7 @@ Write a code chunk to remove the inventory variable. Save the results in a data 
 :::
 
 ::: {.callout-note icon="false" title="Problem 4"}
-Make a data set called `dallas_sub` that includes data only from the city of Dallas in 2012 and 2013.  Show the first six rows of `dallas_sub`.
+Make a data set called `dallas_sub` that includes data only from the city of Dallas in 2012 and 2013. Show the first six rows of `dallas_sub`.
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 4 Answers"}
@@ -264,7 +257,7 @@ Make a data set called `dallas_sub` that includes data only from the city of Dal
 :::
 
 ::: {.callout-note icon="false" title="Problem 5"}
-Add a column to the `dallas_sub` data set called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 100`). Be sure to **save** the results into a data frame called `dallas_sub`.  Display the last six rows of `dallas_sub`. 
+Add a column to the `dallas_sub` data set called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 100`). Be sure to **save** the results into a data frame called `dallas_sub`. Display the last six rows of `dallas_sub`.
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 5 Answers"}
@@ -274,11 +267,9 @@ Add a column to the `dallas_sub` data set called `prct_sold` that calculates the
 ```
 :::
 
-
 ::: {.callout-note icon="false" title="Problem 6"}
-Calculate the **average** percentage of listings that were sold in Dallas **in each month across the years** based on your `dallas_sub` data set. Save the results of the calculation in a data frame called `dallas_summary` with the results stored in `mean_prct_sold`. Display the results of `dallas_summary`. 
+Calculate the **average** percentage of listings that were sold in Dallas **in each month across the years** based on your `dallas_sub` data set. Save the results of the calculation in a data frame called `dallas_summary` with the results stored in `mean_prct_sold`. Display the results of `dallas_summary`.
 :::
-
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 6 Answers"}
 ```{r}
@@ -288,7 +279,7 @@ Calculate the **average** percentage of listings that were sold in Dallas **in e
 :::
 
 ::: {.callout-note icon="false" title="Problem 7"}
-Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings that were sold in Dallas, so you can see **which month** had the greatest percentage of houses sold in Dallas on average from 2012-2013.  You do not need to save the results. 
+Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings that were sold in Dallas, so you can see **which month** had the greatest percentage of houses sold in Dallas on average from 2012-2013. You do not need to save the results.
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 7 Answers"}
@@ -298,16 +289,13 @@ Arrange the `dallas_summary` in `desc`ending order based on the average percenta
 ```
 :::
 
-
 ## More Advanced Wrangling
 
-Please answer the following questions with text and/or code where appropriate. You may have to use multiple `dplyr` functions to answer each question. Think through the steps of how to get to the answer you are trying to find. 
-
+Please answer the following questions with text and/or code where appropriate. You may have to use multiple `dplyr` functions to answer each question. Think through the steps of how to get to the answer you are trying to find.
 
 ::: {.callout-note icon="false" title="Problem 8"}
-Run the following code chunk. Study the code, and the output. Explain in your own words what this code chunk calculated.  Specifically, compare this code to the code in Problems 4 through 7. 
+Run the following code chunk. Study the code, and the output. Explain in your own words what this code chunk calculated. Specifically, compare this code to the code in Problems 4 through 7.
 :::
-
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 8 Answers"}
 ```{r}
@@ -319,11 +307,11 @@ txhousing %>%
   arrange(desc(mean_prct_sold))
 ```
 
-+ Delete this and put your text answer here. 
+-   Delete this and put your text answer here.
 :::
 
 ::: {.callout-note icon="false" title="Problem 9"}
-In January of 2015, what city had the fewest houses listed for sale?  Report the city and the number of houses said city had listed for sale using inline `R` code.
+In January of 2015, what city had the fewest houses listed for sale? Report the city and the number of houses said city had listed for sale using inline `R` code.
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 9 Answers"}
@@ -332,9 +320,8 @@ In January of 2015, what city had the fewest houses listed for sale?  Report the
 
 ```
 
-+ Delete this and put your text answer here. 
+-   Delete this and put your text answer here.
 :::
-
 
 ::: {.callout-note icon="false" title="Problem 10"}
 In 2012, in which month were the most houses sold in Texas? Report the month were the most houses sold in Texas and the number of houses sold for that month using inline `R` code.
@@ -346,21 +333,18 @@ In 2012, in which month were the most houses sold in Texas? Report the month wer
 
 ```
 
-+ Delete this and put your text answer here. 
+-   Delete this and put your text answer here.
 :::
-
 
 ::: {.callout-note icon="false" title="Problem 11"}
 Generate a **single** table that shows the total number of houses sold in **Austin** in **2000 and 2001** (total over the entire period), & the total number of houses sold in **Dallas** in **2000 and 2001** (total over the entire period). This calculation requires a number of steps, so it might help you to first write out on paper the different steps you will need to take. That will help you set out a "blueprint" for tackling the problem. **Hint**: recall the `sum()` function can add values.
 :::
-
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 11 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
 
 ```
-
 :::
 
 # Turning in Your Work
@@ -371,7 +355,6 @@ You will need to make sure you commit and push all of your changes to the github
 -   Make sure you **render a final copy with all your changes** and work.
 -   Look at your final html file to make sure it contains the work you expect and is formatted properly.
 :::
-
 
 # Logging out of the Server
 
@@ -384,7 +367,6 @@ There are many statistics classes and students using the Server. To keep the ser
 -   When the browser refreshes, you can click on the sign out next to your name in the top right.
 -   You are signed out.
 :::
-
 
 ```{r}
 sessionInfo()
