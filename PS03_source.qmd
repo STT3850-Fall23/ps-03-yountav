@@ -240,8 +240,8 @@ Write a code chunk to remove the inventory variable. Save the results in a data 
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 3 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
-
+txhousing %>% 
+  select(-inventory)
 ```
 :::
 
@@ -251,7 +251,9 @@ Make a data set called `dallas_sub` that includes data only from the city of Dal
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 4 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+dallas_sub <- txhousing %>% 
+  filter(year == 2012,2013 & city == "Dallas") 
+head(dallas_sub)
 
 ```
 :::
