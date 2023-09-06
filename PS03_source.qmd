@@ -264,7 +264,9 @@ Add a column to the `dallas_sub` data set called `prct_sold` that calculates the
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 5 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+dallas_sub <- dallas_sub %>%
+  mutate(prct_sold = sales/listings * 100)
+head(dallas_sub)
 
 ```
 :::
