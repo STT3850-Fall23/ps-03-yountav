@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified on September 07, 2023 09:41:49 Eastern Daylight Time</p>
+      <p class="date">Last modified on September 07, 2023 10:00:33 Eastern Daylight Time</p>
     </div>
   </div>
   
@@ -763,7 +763,7 @@ Problem 4 Answers
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dallas_sub <span class="ot">&lt;-</span> txhousing <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2012</span>,<span class="dv">2013</span> <span class="sc">&amp;</span> city <span class="sc">==</span> <span class="st">"Dallas"</span>) </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2012</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">2013</span>, city <span class="sc">==</span> <span class="st">"Dallas"</span>) </span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dallas_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
@@ -807,7 +807,7 @@ Problem 5 Answers
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dallas_sub <span class="ot">&lt;-</span> dallas_sub <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prct_sold =</span> sales<span class="sc">/</span>listings <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prct_sold =</span> sales<span class="sc">/</span>listings <span class="sc">*</span><span class="dv">100</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dallas_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
@@ -858,12 +858,12 @@ Problem 6 Answers
 <pre><code># A tibble: 6 × 2
   month mean_prct_sold
   &lt;int&gt;          &lt;dbl&gt;
-1     1           2555
-2     2           3085
-3     3           4068
-4     4           4291
-5     5           5004
-6     6           5196</code></pre>
+1     1          2872.
+2     2          3321 
+3     3          4554.
+4     4          4918 
+5     5          5582.
+6     6          5588.</code></pre>
 </div>
 </div>
 </div>
@@ -896,23 +896,23 @@ Problem 7 Answers
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dallas_summary <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dallas_summary))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_prct_sold))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 2
    month mean_prct_sold
    &lt;int&gt;          &lt;dbl&gt;
- 1    12           3849
- 2    11           3875
- 3    10           4214
- 4     9           4151
- 5     8           5264
- 6     7           4859
- 7     6           5196
- 8     5           5004
- 9     4           4291
-10     3           4068
-11     2           3085
-12     1           2555</code></pre>
+ 1     8          5736.
+ 2     7          5590.
+ 3     6          5588.
+ 4     5          5582.
+ 5     4          4918 
+ 6     3          4554.
+ 7     9          4546 
+ 8    10          4404.
+ 9    12          4030.
+10    11          3920.
+11     2          3321 
+12     1          2872.</code></pre>
 </div>
 </div>
 </div>
@@ -973,7 +973,7 @@ Problem 8 Answers
 </div>
 </div>
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>This code chunk outputs data as one piece of a data set. The data represents Dallas listings sold in the years 2012 and 2013 on average per month in <code>desc</code>ending order. This is different from the outputs from questions #4-#7 because my outputs demonstrate the <code>listings</code> in Dallas in 2012 and 2013, but the numbers for <code>mean percentage sold</code> range from 3900 to 5800, whereas these numbers range from 30 to 39. Apart from this, there seems to be no difference between the two codes that were inputted.</li>
 </ul>
 </div>
 </div>

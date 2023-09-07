@@ -252,7 +252,7 @@ Make a data set called `dallas_sub` that includes data only from the city of Dal
 ::: {.callout-important icon="false" collapse="false" title="Problem 4 Answers"}
 ```{r}
 dallas_sub <- txhousing %>% 
-  filter(year == 2012,2013 & city == "Dallas") 
+  filter(year == 2012 | year == 2013, city == "Dallas") 
 head(dallas_sub)
 
 ```
@@ -265,7 +265,7 @@ Add a column to the `dallas_sub` data set called `prct_sold` that calculates the
 ::: {.callout-important icon="false" collapse="false" title="Problem 5 Answers"}
 ```{r}
 dallas_sub <- dallas_sub %>%
-  mutate(prct_sold = sales/listings * 100)
+  mutate(prct_sold = sales/listings *100)
 head(dallas_sub)
 
 ```
@@ -292,7 +292,7 @@ Arrange the `dallas_summary` in `desc`ending order based on the average percenta
 ::: {.callout-important icon="false" collapse="false" title="Problem 7 Answers"}
 ```{r}
 dallas_summary %>%
-  arrange(desc(dallas_summary))
+  arrange(desc(mean_prct_sold))
 
 ```
 :::
@@ -315,7 +315,7 @@ txhousing %>%
   arrange(desc(mean_prct_sold))
 ```
 
--   Delete this and put your text answer here.
+-   This code chunk outputs data as one piece of a data set. The data represents Dallas listings sold in the years 2012 and 2013 on average per month in `desc`ending order. This is different from the outputs from questions #4-#7 because my outputs demonstrate the `listings` in Dallas in 2012 and 2013, but the numbers for `mean percentage sold` range from 3900 to 5800, whereas these numbers range from 30 to 39. Apart from this, there seems to be no difference between the two codes that were inputted. 
 :::
 
 ::: {.callout-note icon="false" title="Problem 9"}
