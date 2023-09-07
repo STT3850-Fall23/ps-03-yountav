@@ -278,6 +278,7 @@ Calculate the **average** percentage of listings that were sold in Dallas **in e
 ::: {.callout-important icon="false" collapse="false" title="Problem 6 Answers"}
 ```{r}
 dallas_summary <- dallas_sub %>% 
+  group_by(month) %>% 
   summarize(mean_prct_sold = mean(sales))
 head(dallas_summary)
 
@@ -290,7 +291,8 @@ Arrange the `dallas_summary` in `desc`ending order based on the average percenta
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 7 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+dallas_summary %>%
+  arrange(desc(dallas_summary))
 
 ```
 :::
