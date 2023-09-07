@@ -332,7 +332,7 @@ tail(listings2, n = 1)
 
 ```
 
--   San Marcos had the lowest number of `listings` in January of 2015, which can be found by inputting the code above or typing in to the console `View(txhousing)`
+-   **`r tail(listings2, n = 1)` ** had the lowest number of `listings` in January of 2015, which can be found by inputting the code above or typing in to the console `View(txhousing)`
 :::
 
 ::: {.callout-note icon="false" title="Problem 10"}
