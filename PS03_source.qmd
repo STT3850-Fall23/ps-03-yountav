@@ -324,11 +324,15 @@ In January of 2015, what city had the fewest houses listed for sale? Report the 
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 9 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+listings2 <- txhousing %>%
+  filter(month == 1, year == 2015) %>%
+  select(city, listings) %>%
+  arrange(desc(listings))
+tail(listings2, n = 1)
 
 ```
 
--   Delete this and put your text answer here.
+-   San Marcos had the lowest number of `listings` in January of 2015, which can be found by inputting the code above or typing in to the console `View(txhousing)`
 :::
 
 ::: {.callout-note icon="false" title="Problem 10"}
