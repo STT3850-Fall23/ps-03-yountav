@@ -358,7 +358,11 @@ Generate a **single** table that shows the total number of houses sold in **Aust
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 11 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+totalSales1 <- txhousing %>% 
+  filter(year == 2000 | year == 2001, city == "Austin" | city == "Dallas") %>%
+  group_by(city) %>%
+  summarise(totalSales = sum(sales))
+totalSales1
 
 ```
 :::
