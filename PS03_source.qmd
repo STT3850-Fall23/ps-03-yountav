@@ -341,11 +341,15 @@ In 2012, in which month were the most houses sold in Texas? Report the month wer
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 10 Answers"}
 ```{r}
-# Type your code and comments inside the code chunk
+sales2 <- txhousing %>%
+  filter(year == 2012) %>%
+  select(month, sales) %>%
+  arrange(desc(sales))
+head(sales2, n = 1)
 
 ```
 
--   Delete this and put your text answer here.
+-   In August of 2012, there were 7112 houses sold in Texas. 
 :::
 
 ::: {.callout-note icon="false" title="Problem 11"}
